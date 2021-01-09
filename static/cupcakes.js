@@ -41,16 +41,13 @@ $("form").on("submit", async function (evt) {
     $("form").trigger("reset");
   });
   
-  
-  $(".delete-button").on("click", async function (evt) {
-    evt.preventDefault();
-    console.log(evt)
-    let $cupcake = $(evt.target).closest("div");
-    let cupcakeId = $cupcake.attr("data-cupcake-id");
-  
-    await axios.delete(`${BASE_URL}/cupcakes/${cupcakeId}`);
-    $cupcake.remove();
-  });
-  
-  
-  $(showInitialCupcakes);
+$("#cake-list").on("click", ".delete-button", async function(e) {
+  e.preventDefault();
+  let $cake = $(e.target).closest("div");
+  let $cakeId = $cake.attr("data-cupcake-id");
+
+  await axios.delete(`${BASE_URL}/cupcakes/${$cakeId}`);
+  $cake.remove();
+})
+
+showInitialCupcakes();
